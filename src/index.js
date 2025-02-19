@@ -1,3 +1,3 @@
-import { modal } from './modules/modal'
+import modal from './modules/modal';
 
 modal();
