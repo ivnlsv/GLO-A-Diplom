@@ -95,8 +95,8 @@
 
 		<!-- * * * * * * Top slider * * * * * * -->
 		<div class="top-slider white text-center relative">
-			<div class="item relative"
-				style="background: url(/images/slide1.jpg) 50% 50% no-repeat; background-size: cover;">
+			<div class="item relative active">
+				<img src="./images/slide1.jpg" alt="Слайд 1" class="slide-image" />
 				<div class="table">
 					<div class="table-cell">
 						<div class="container">
@@ -111,8 +111,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="item relative"
-				style="background: url(images/slide2.jpg) 50% 50% no-repeat; background-size: cover;">
+			<div class="item relative">
+				<img src="./images/slide2.jpg" alt="Слайд 2" class="slide-image" />
 				<div class="table">
 					<div class="table-cell">
 						<div class="container">
@@ -127,8 +127,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="item relative"
-				style="background: url(./images/slide3.jpg) 50% 50% no-repeat; background-size: cover;">
+			<div class="item relative">
+				<img src="./images/slide3.jpg" alt="Слайд 3" class="slide-image" />
 				<div class="table">
 					<div class="table-cell">
 						<div class="container">
@@ -143,7 +143,7 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="dots-container"></div>
 		</div>
 		<!-- * * * * * * Top slider: end * * * * * * -->
 
@@ -166,8 +166,8 @@
 							<div class="element relative">
 								<a class="absolute fancyboxModal" href="#application"
 									data-application="Аварийный выезд"></a>
-								<div class="img-wrapper">
-									<img src="./images/service1.jpg">
+								<div class="img-wrapper" id="img-btn" type="button">
+									<img src="./images/service1.jpg" >
 								</div>
 								<div class="element-content">
 									<div class="title-h5 upper">Аварийный выезд</div>
@@ -283,7 +283,7 @@
 			<div class="container text-center">
 				<span class="f30 helios">Не нашли нужной услуги?</span>
 				<div class="push20 visible-xs visible-sm"></div>
-				<a class="button button-services fancyboxModal invert" href="#feedback">Звоните, мы обязательно вам
+				<a class="button button-services fancyboxModal invert" id="button-services" href="#feedback">Звоните, мы обязательно вам
 					поможем!</a>
 			</div>
 			<div class="push50"></div>
