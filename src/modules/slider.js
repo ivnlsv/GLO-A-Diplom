@@ -22,8 +22,7 @@ const slider = () => {
             dot.classList.toggle('active', index === currentIndex);
         });
     }
-    //updateDots();
-    
+       
     const updateSlider = () => {
         items.forEach((item, index) => {
             item.classList.toggle('active', index === currentIndex);

@@ -1,5 +1,5 @@
 const accordeon = () => { 
-    const elements = document.querySelectorAll('.element');
+    const elements = document.querySelectorAll('.accordeon .element .title');
 
     elements.forEach(element => {
         element.querySelector('.title').addEventListener('click', () => {
