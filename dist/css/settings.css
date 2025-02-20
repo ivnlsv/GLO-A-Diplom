@@ -398,7 +398,7 @@ img.right{
     left: 50%;
     margin-top: -7px;
     margin-left: -4px;
-    /* background: url(../images/fancy-arrow.png) 0 0 no-repeat; */
+    background: url(../images/fancy-arrow.png) 0 0 no-repeat;
 }
 .fancybox-title-float-wrap{
     left: 0;
@@ -595,21 +595,21 @@ img.right{
 /****************end slick carousel****************/
 
 /************************** custom chrome scroll *****************************/
-/* ::-webkit-resizer {
+::-webkit-resizer {
     background-image: url('');
     background-repeat: no-repeat;
     width: 9px;
     height: 1px;
-} */
+}
 ::-webkit-scrollbar {
     width: 9px;
 }
-/* ::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
     background-image: url('');
     background-repat: no-repeat;
     width: 9px;
     height: 0px;
-} */
+}
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0px;
     border-radius: 0px;

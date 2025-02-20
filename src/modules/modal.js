@@ -1,5 +1,6 @@
 import { animate } from './helpers.js';
 
+
 const modal = () => {
     const modalOpenBtns = [document.querySelector('#modal-open'), document.querySelector('#button-services'), ...document.querySelectorAll('.absolute')];
     const modalOverlay = document.querySelector('.modal-overlay');
