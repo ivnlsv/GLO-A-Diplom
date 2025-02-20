@@ -838,7 +838,7 @@ hr.white {
 }
 
 /* top slider */
-.top-slider .slick-dots {
+/* .top-slider .slick-dots {
 	position: absolute;
 	bottom: 25px;
 }
@@ -847,31 +847,21 @@ hr.white {
 }
 .top-slider .slick-dots li.slick-active {
 	background-color: #fff !important;
-}
-.item {
-    display: none;
-    height: 100%;
-    position: relative; /* Для позиционирования внутренних элементов */
-}
-.top-slider {
-	position: relative;
-	overflow: hidden;
-	height: 450px;
-}
-/* .top-slider .item {
-	overflow: hidden;
-	height: 450px;
-	position: relative;
 } */
-.top-slider .item:before {
-	content: ""; 
-	display: block;
+
+ .top-slider .item {
+	overflow: hidden;
+	height: 450px;
+	position: relative;
+} 
+.slider-overlay {
+	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 	background: rgba(0, 0, 0, 0.5);
-	
+	z-index: 1;
 }
 /* .top-slider .table {
 	position: relative;
@@ -881,34 +871,36 @@ hr.white {
     display: block;
 }
 .slide-image {
+	display: block;
 	width: 100%;
     height: 100%;
     object-fit: cover; 
 	
 }
 .table {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
+	position: absolute;
+    /* height: 100%; */
+	top: 25%; 
+    /* left: 50%; 
+    transform: translate(-50%, -50%); */
+    /* top: 0;
+    left: 0; */
+    /* width: 100%; */
+}	
+	
 .table-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-	 
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
 }
 
-.title-h1.big {
-    text-align: center;
+.text-container {
+	text-align: center;
     color: #fff; 
+	
 } 
 
 .dots-container {
@@ -938,7 +930,7 @@ hr.white {
     display: block; 
 }
 .dot.active {
-    background-color: #333;
+    background-color: #fff;
 }
 .video-block {
 	height: 100%;
@@ -1239,6 +1231,21 @@ video#video_background {
 	line-height: 1.2;
 	margin-bottom: 10px;
 	height: 40px;
+}
+.services-carousel {
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.services-carousel .col-sm-6 {
+	flex: 0 0 30%;
+	box-sizing: border-box;
+}
+.services-arrow {
+	display: flex;
+	justify-content: space-between;
+	cursor: pointer;
 }
 .services-elements .title-h5:after {
 	content: "";
