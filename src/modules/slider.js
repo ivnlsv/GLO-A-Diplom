@@ -1,59 +1,98 @@
 const slider = () => {
-    const slides = document.querySelectorAll('.item');
-    const dotsContainer = document.querySelector('.dots-container');
-    const textItems = document.querySelectorAll('.table-cell');
-    const textContainer = document.querySelectorAll('.text-container');
+    const slidesData = [
+        {
+            imgSrc: './images/slide1.jpg',
+            title: 'Шаблон сайта электрика',
+            text: 'Решите свою проблему прямо сейчас! Низкие цены. <br /> Найдете дешевле - вернем разницу!'
+        },
+        {
+            imgSrc: './images/slide2.jpg',
+            title: 'Другой кричащий заголовок!',
+            text: 'В этом блоке можно разместить несколько слайдов на любую тематику, с необходимыми вам заголовками и текстами.'
+        },
+        {
+            imgSrc: './images/slide3.jpg',
+            title: 'Услуги электрика',
+            text: 'Решите свою проблему прямо сейчас! Низкие цены. <br /> Найдете дешевле - вернем разницу!'
+        }
+    ];
 
+    const sliderContainer = document.querySelector('.top-slider');
     let currentIndex = 0;
-    let autoSlide;
+    let intervalId;
 
-    // Создание точек навигации
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        dot.dataset.index = index;
+    function createSlides() {
+        slidesData.forEach((slide, index) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.classList.add('item');
+            if (index === 0) slideDiv.classList.add('active');
 
-        // Обработчик события для кнопки
-        dot.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            goToSlide(index);
+            slideDiv.innerHTML = `
+                <img src="${slide.imgSrc}" alt="Слайд ${index + 1}" class="slide-image"/>
+                <div class="slider-overlay"></div>
+                <div class="table">
+                    <div class="table-cell">
+                        <div class="text-container">
+                            <div class="title-h1 big">${slide.title}</div>
+                            <div class="text">${slide.text}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            sliderContainer.insertBefore(slideDiv, sliderContainer.querySelector('.dots-container'));
         });
+        createDots();
+    }
 
-        dotsContainer.appendChild(dot);
-    });
+    function createDots() {
+        const dotsContainer = document.querySelector('.dots-container');
+        slidesData.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
 
-    // Функция для показа текущего слайда
-    const showSlide = (index) => {
-        slides.forEach((slide, idx) => {
-            slide.classList.toggle('active', idx === index);
-            dotsContainer.children[idx].classList.toggle('active', idx === index);
+            dot.addEventListener('click', () => setSlide(index));
+
+            dotsContainer.appendChild(dot);
         });
+    }
 
-        
+    function setSlide(index) {
+        const slides = document.querySelectorAll('.item');
+        const dots = document.querySelectorAll('.dot');
+
+        slides[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+
         currentIndex = index;
+
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+
+        resetInterval();
     }
 
-    // Функция перехода к слайду
-    const goToSlide = (index) => {
-        clearInterval(autoSlide);
-        showSlide(index);
-    }
-
-    // Функция автоматического слайда
-    const startAutoSlide = () => {
-        autoSlide = setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            showSlide(currentIndex);
+    function startAutoSlide() {
+        intervalId = setInterval(() => {
+            let nextIndex = (currentIndex + 1) % slidesData.length;
+            setSlide(nextIndex);
         }, 3000);
     }
 
-    // Пауза при наведении на слайдер
-    const topSlider = document.querySelector('.top-slider');
-    topSlider.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    topSlider.addEventListener('mouseleave', startAutoSlide);
+    function stopAutoSlide() {
+        clearInterval(intervalId);
+    }
 
-    // Инициализация слайдера
+    function resetInterval() {
+        stopAutoSlide();
+        startAutoSlide();
+    }
+
+    sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+    // Инициализация
+    createSlides();
     startAutoSlide();
-};
-
+}
 export default slider;
