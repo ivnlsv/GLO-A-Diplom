@@ -293,8 +293,15 @@ a.absolute {
 	padding: 55px 25px 35px;
 	z-index: 99;
 }
-#responseMessage .modal-content.error {
+#responseMessage {
+	display: block;
+}
+#responseMessage .modal-content.success {
 	color: #2fab6d;
+}
+
+#responseMessage .modal-content.error {
+	color: #ec0808;
 }
 .box {
 	display: none;
