@@ -1,71 +1,81 @@
 const formSend = () => {
-    const form = document.forms["form-callback"];
-    const responseMessage = document.querySelector("#responseMessage .modal-content");
+    const form = document.forms['form-callback'];
+    const responseMessage = document.querySelector('#responseMessage .modal-content');
     const loadText = 'Идет отправка...';
-    const errorText = 'Ошибка...';
+    const errorText = 'Ошибка отправки...';
     const successText = 'Отправлено!';
 
     const isCyrillic = (text) => /^[\u0400-\u04FF\s]+$/.test(text);
     const isValidPhone = (phone) => /^[0-9+]+$/.test(phone);
 
-    const sendData = (data) => {
-        // Отправка данных через AJAX с использованием fetch
-        return fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
+    const sendData = async (data) => {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                "Content-type": "application/json"
-            }
-        })
-        .then(response => response.json());
+                'Content-type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok ');
+        }
+
+        return response.json();
     };
 
-    form.addEventListener("submit", function (e) {
+    const resetResponseMessage = () => {
+       
+        responseMessage.textContent = '';
+        responseMessage.classList.remove('error', 'success');
+        responseMessage.style.display = 'block'; 
+    };
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const fio = form.fio.value.trim();
         const tel = form.tel.value.trim();
 
-        // Валидация
         if (!isCyrillic(fio)) {
-            alert("Имя должно содержать только кириллицу.");
+            alert('Имя должно содержать только кириллицу.');
             return;
         }
 
         if (!isValidPhone(tel)) {
-            alert("Телефон должен содержать только цифры и '+'.");
+            alert("Телефон должен содержать только цифры и '+'");
             return;
         }
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Показать сообщение о отправке
+        resetResponseMessage();
+      
         responseMessage.textContent = loadText;
-        //document.querySelector(".modal-content").style.display = "block";
         form.append(responseMessage);
+       
+        await new Promise(resolve => setTimeout(resolve, 3000)); 
 
-        // Задержка перед отправкой данных
-        setTimeout(() => {
-            sendData(data)
-            .then(data => {
-                responseMessage.innerHTML = successText;
-                responseMessage.classList.remove("error");
-                responseMessage.classList.add("success");
-                form.reset(); // Очистка формы после успешной отправки
-            })
-            .catch(error => {
-                responseMessage.innerHTML = errorText;
-                responseMessage.classList.remove("success");
-                responseMessage.classList.add("error");
-            })
-            .finally(() => {
-                // Скрыть сообщение после отправки
-                setTimeout(() => {
-                    document.querySelector(".modal-content").style.display = "none";
-                }, 2000); // Скрыть сообщение через 2 секунды
-            });
-        }, 5); // Задержка 5 мс
+        try {
+            const result = await sendData(data);
+            responseMessage.innerHTML = successText;
+            responseMessage.classList.remove('error');
+            responseMessage.classList.add('success');
+            form.reset(); 
+
+        } catch (error) {
+            responseMessage.innerHTML = errorText; 
+            responseMessage.classList.remove('success');
+            responseMessage.classList.add('error');
+        } finally {
+   
+            setTimeout(() => {
+                document.querySelector('.modal-callback').style.display = 'none';
+                document.querySelector('.modal-overlay').style.display = 'none';
+            }, 2000);
+        }
     });
+   
 };
 
 export default formSend;

@@ -1,42 +1,59 @@
 const slider = () => {
-	const items = document.querySelectorAll('.item');
-	const dotsContainer = document.querySelector('.dots-container');
-	let currentIndex = 0;
+    const slides = document.querySelectorAll('.item');
+    const dotsContainer = document.querySelector('.dots-container');
+    const textItems = document.querySelectorAll('.table-cell');
+    const textContainer = document.querySelectorAll('.text-container');
 
-	const createDots = () => {
-		items.forEach((_, index) => {
-			const dot = document.createElement('div');
-			dot.classList.add('dot');
-			dot.addEventListener('click', () => {
-				currentIndex = index;
-				updateSlider();
-			});
-			dotsContainer.appendChild(dot);
-		});
-	};
+    let currentIndex = 0;
+    let autoSlide;
 
-	const updateDots = () => {
-		const dots = document.querySelectorAll('.dot');
-		dots.forEach((dot, index) => {
-			dot.classList.toggle('active', index === currentIndex);
-		});
-	};
+    // Создание точек навигации
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.dataset.index = index;
 
-	const updateSlider = () => {
-		items.forEach((item, index) => {
-			item.classList.toggle('active', index === currentIndex);
-		});
-		updateDots();
-	};
+        // Обработчик события для кнопки
+        dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            goToSlide(index);
+        });
 
-	const nextSlide = () => {
-		currentIndex = (currentIndex + 1) % items.length;
-		updateSlider();
-	};
+        dotsContainer.appendChild(dot);
+    });
 
-	createDots();
-	updateSlider();
-	setInterval(nextSlide, 3000);
+    // Функция для показа текущего слайда
+    const showSlide = (index) => {
+        slides.forEach((slide, idx) => {
+            slide.classList.toggle('active', idx === index);
+            dotsContainer.children[idx].classList.toggle('active', idx === index);
+        });
+
+        
+        currentIndex = index;
+    }
+
+    // Функция перехода к слайду
+    const goToSlide = (index) => {
+        clearInterval(autoSlide);
+        showSlide(index);
+    }
+
+    // Функция автоматического слайда
+    const startAutoSlide = () => {
+        autoSlide = setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, 3000);
+    }
+
+    // Пауза при наведении на слайдер
+    const topSlider = document.querySelector('.top-slider');
+    topSlider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    topSlider.addEventListener('mouseleave', startAutoSlide);
+
+    // Инициализация слайдера
+    startAutoSlide();
 };
 
 export default slider;
