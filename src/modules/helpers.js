@@ -17,4 +17,4 @@ const animate = ({timing, draw, duration}) => {
   
     });
 }
-export { animate}
+export { animate }
