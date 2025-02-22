@@ -28,8 +28,8 @@ const slider = () => {
             if (index === 0) slideDiv.classList.add('active');
 
             slideDiv.innerHTML = `
-                <img src="${slide.imgSrc}" alt="Слайд ${index + 1}" class="slide-image"/>
                 <div class="slider-overlay"></div>
+                <img src="${slide.imgSrc}" alt="Слайд ${index + 1}" class="slide-image"/>
                 <div class="table">
                     <div class="table-cell">
                         <div class="text-container">
