@@ -72,6 +72,7 @@ const formSend = () => {
             setTimeout(() => {
                 document.querySelector('.modal-callback').style.display = 'none';
                 document.querySelector('.modal-overlay').style.display = 'none';
+                responseMessage.style.display = 'none';
             }, 2000);
         }
     });
