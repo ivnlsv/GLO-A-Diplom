@@ -879,7 +879,7 @@ hr.white {
 	height: 450px;
 	position: relative;
 } 
-.slider-overlay {
+/* .slider-overlay {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -887,7 +887,7 @@ hr.white {
 	left: 0;
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 1;
-}
+} */
 /* .top-slider .table {
 	position: relative;
 	z-index: 10;
