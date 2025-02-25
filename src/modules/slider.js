@@ -6,6 +6,29 @@ const slider = () => {
 	let currentIndex = 0;
 	let autoSlide;
 
+	const showSlide = (index) => {
+		slides.forEach((slide, idx) => {
+			slide.classList.toggle('active', idx === index);
+			textContainers[idx].classList.toggle('active', idx === index);
+
+			dotsContainer.children[idx].classList.toggle('active', idx === index);
+		});
+
+		currentIndex = index;
+	};
+	const startAutoSlide = () => {
+		autoSlide = setInterval(() => {
+			currentIndex = (currentIndex + 1) % slides.length;
+			showSlide(currentIndex);
+		}, 3000);
+	};
+
+	const goToSlide = (index) => {
+		clearInterval(autoSlide);
+		showSlide(index);
+		currentIndex = index;
+	};
+
 	slides.forEach((_, index) => {
 		const dot = document.createElement('div');
 		dot.classList.add('dot');
@@ -18,30 +41,6 @@ const slider = () => {
 
 		dotsContainer.appendChild(dot);
 	});
-
-	const showSlide = (index) => {
-		slides.forEach((slide, idx) => {
-			slide.classList.toggle('active', idx === index);
-			textContainers[idx].classList.toggle('active', idx === index);
-
-			dotsContainer.children[idx].classList.toggle('active', idx === index);
-		});
-
-		currentIndex = index;
-	};
-
-	const goToSlide = (index) => {
-		clearInterval(autoSlide);
-		showSlide(index);
-		currentIndex = index;
-	};
-
-	const startAutoSlide = () => {
-		autoSlide = setInterval(() => {
-			currentIndex = (currentIndex + 1) % slides.length;
-			showSlide(currentIndex);
-		}, 3000);
-	};
 
 	const topSlider = document.querySelector('.top-slider');
 	topSlider.addEventListener('mouseenter', () => clearInterval(autoSlide));
