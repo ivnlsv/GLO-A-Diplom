@@ -294,7 +294,16 @@ a.absolute {
 	z-index: 99;
 }
 #responseMessage {
-	display: block;
+	display: none;
+	position: fixed;
+	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 460px;
+	max-width: 100%;
+	background: #fff;
+	padding: 55px 25px 35px;
+	z-index: 99;
 }
 .success {
 	color: #2fab6d;

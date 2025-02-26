@@ -1,7 +1,7 @@
 const accordeon = () => {
 	document.querySelectorAll('.accordeon .element .title').forEach((title) => {
-		title.addEventListener('click', () => {
-			const parentElement = this.parentElement;
+		title.addEventListener('click', (e) => {
+			const parentElement = e.target.parentElement;;
 			const isActive = parentElement.classList.contains('active');
 
 			document.querySelectorAll('.accordeon .element').forEach((element) => {
