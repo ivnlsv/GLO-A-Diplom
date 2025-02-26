@@ -293,7 +293,7 @@ a.absolute {
 	padding: 55px 25px 35px;
 	z-index: 99;
 }
-#responseMessage {
+.modal-response {
 	display: none;
 	position: fixed;
 	top: 20%;
